@@ -1,0 +1,11 @@
+server:
+  port: 8901
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: a13c90d62896adad5b0e
+            clientSecret: 26fe1aa03a269a72c9a08e477f906bdf523c09c7
