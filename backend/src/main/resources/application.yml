@@ -9,3 +9,21 @@ spring:
           github:
             clientId: a13c90d62896adad5b0e
             clientSecret: 26fe1aa03a269a72c9a08e477f906bdf523c09c7
+
+  datasource:
+#    platform: postgres
+    url: jdbc:postgresql://localhost:5432/chatbox
+    username: chatboxadmin
+    password: password
+  jpa:
+#    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#    show-sql: true
+#    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+#    properties:
+#      hibernate:
+#        jdbc:
+#          lob:
+#            non_contextual_creation: true
