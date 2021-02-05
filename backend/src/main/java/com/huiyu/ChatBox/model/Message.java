@@ -17,9 +17,13 @@ public class Message  implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userid")
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "channelid")
+    private Channel channel;
 
     @Column
     private String message;
@@ -29,8 +33,9 @@ public class Message  implements Serializable {
     @Column(name = "created")
     private Date created;
 
-    public Message(User user, String message){
+    public Message(User user, Channel channel, String message){
         this.user = user;
+        this.channel = channel;
         this.message = message;
     }
 }

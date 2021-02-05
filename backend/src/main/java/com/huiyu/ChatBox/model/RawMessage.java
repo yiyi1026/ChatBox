@@ -18,4 +18,5 @@ import java.util.Date;
 public class RawMessage {
     private String name;
     private String message;
+    private String channelname;
 }
