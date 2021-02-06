@@ -6,6 +6,7 @@ import com.huiyu.ChatBox.model.RequestMessage;
 import com.huiyu.ChatBox.repository.ChannelRepository;
 import com.huiyu.ChatBox.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
@@ -21,6 +22,7 @@ public class MessageController {
     @Autowired
     MessageRepository messageRepository;
 
+    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     @RequestMapping(path = "/api/message")
     public Flux<Message> getMessage(RequestMessage requestMessage){
         Date from = requestMessage.getFrom();
@@ -46,15 +48,4 @@ public class MessageController {
         return Flux.fromStream(messageList.stream());
     }
 
-//    @RequestMapping(path = "/api/message")
-//    public String getMessage(RequestMessage requestMessage){
-//        System.out.println(requestMessage.getChannel());
-//        Channel channel = channelRepository.findByName(requestMessage.getChannel());
-//        List<Message> messageList = messageRepository.findByChannel(channel);
-//        if(messageList.size() == 0){
-//            return "";
-//        } else{
-//            return messageList.get(0).toString();
-//        }
-//    }
 }

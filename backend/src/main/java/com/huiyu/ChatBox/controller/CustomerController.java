@@ -3,6 +3,7 @@ package com.huiyu.ChatBox.controller;
 import com.huiyu.ChatBox.model.User;
 import com.huiyu.ChatBox.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,13 +33,7 @@ public class CustomerController {
         return "Customers are created";
     }
 
-    //    @PostMapping("/create")
-//    public String create(@RequestBody CustomerUI customer){
-//        // save a single Customer
-//        repository.save(new User(customer.getFirstName(), customer.getLastName()));
-//
-//        return "Customer is created";
-//    }
+    @CrossOrigin(allowCredentials = "true", originPatterns = "*")
     @RequestMapping("/findall")
     public List<User> findAll() {
 
@@ -46,24 +41,4 @@ public class CustomerController {
 
         return customers;
     }
-
-//    @RequestMapping("/search/{id}")
-//    public String search(@PathVariable long id){
-//        String customer = "";
-//        customer = repository.findById(id).toString();
-//        return customer;
-//    }
-//
-//    @RequestMapping("/searchbyfirstname/{firstname}")
-//    public List<CustomerUI> fetchDataByLastName(@PathVariable String firstname){
-//
-//        List<Customer> customers = repository.findByFirstName(firstname);
-//        List<CustomerUI> customerUI = new ArrayList<>();
-//
-//        for (Customer customer : customers) {
-//            customerUI.add(new CustomerUI(customer.getFirstName(),customer.getLastName()));
-//        }
-//
-//        return customerUI;
-//    }
 }

@@ -11,19 +11,10 @@ spring:
             clientSecret: 26fe1aa03a269a72c9a08e477f906bdf523c09c7
 
   datasource:
-#    platform: postgres
     url: jdbc:postgresql://localhost:5432/chatbox
     username: chatboxadmin
     password: password
   jpa:
-#    database: POSTGRESQL
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-#    show-sql: true
-#    generate-ddl: true
     hibernate:
       ddl-auto: update
-#    properties:
-#      hibernate:
-#        jdbc:
-#          lob:
-#            non_contextual_creation: true

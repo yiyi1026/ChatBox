@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Date;
 import java.util.List;
-import java.util.function.Predicate;
 
 public interface MessageRepository extends CrudRepository<Message, Long> {
     List<Message> findAll();

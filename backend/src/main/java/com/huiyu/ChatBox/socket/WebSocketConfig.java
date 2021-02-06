@@ -18,7 +18,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/chatbox-websocket").withSockJS();
+        registry.addEndpoint("/chatbox-websocket").setAllowedOrigins("http://localhost:3000").withSockJS();
     }
 
 }
