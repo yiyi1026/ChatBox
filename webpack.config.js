@@ -2,10 +2,10 @@ const path = require('path');
 
 module.exports = {
   context: __dirname,
-  entry: path.resolve(__dirname, 'frontend', 'src', 'index.jsx'),
+  entry: path.resolve(__dirname, 'src', 'index.jsx'),
   output: {
-    path: path.resolve(__dirname, 'frontend', 'public', 'javascripts'),
-    publicPath: 'frontend/public',
+    path: path.resolve(__dirname, 'public', 'javascripts'),
+    publicPath: '/',
     filename: 'bundle.js'
   },
   resolve: {

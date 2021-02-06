@@ -2,7 +2,7 @@
   "name": "ChatBox",
   "version": "1.0.0",
   "description": "",
-  "main": "/frontend/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --watch --mode=development",
@@ -30,5 +30,17 @@
   },
   "devDependencies": {
     "webpack-cli": "^4.5.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
