@@ -18,7 +18,6 @@
   "bugs": {
     "url": "https://github.com/yiyi1026/ChatBox/issues"
   },
-  "homepage": "https://github.com/yiyi1026/ChatBox#readme",
   "dependencies": {
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
