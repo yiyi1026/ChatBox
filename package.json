@@ -1,0 +1,34 @@
+{
+  "name": "ChatBox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/frontend/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --watch --mode=development",
+    "start": "react-scripts start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yiyi1026/ChatBox.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yiyi1026/ChatBox/issues"
+  },
+  "homepage": "https://github.com/yiyi1026/ChatBox#readme",
+  "dependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.2"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.5.0"
+  }
+}

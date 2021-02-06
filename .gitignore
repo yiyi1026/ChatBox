@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+.DS_Store
+node_modules/
+bundle.js
+bundle.js.map
+frontend/public/assets/*
