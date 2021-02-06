@@ -1,68 +1,60 @@
 package com.huiyu.ChatBox.controller;
 
-import com.huiyu.ChatBox.model.*;
+import com.huiyu.ChatBox.model.Channel;
+import com.huiyu.ChatBox.model.Message;
+import com.huiyu.ChatBox.model.RequestMessage;
 import com.huiyu.ChatBox.repository.ChannelRepository;
 import com.huiyu.ChatBox.repository.MessageRepository;
-import com.huiyu.ChatBox.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.util.HtmlUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-@Controller
+@RestController
 public class MessageController {
-    @Autowired
-    UserRepository userRepository;
     @Autowired
     ChannelRepository channelRepository;
     @Autowired
     MessageRepository messageRepository;
 
-    @MessageMapping("/{channelname}")
-    @SendTo("/channel/{channelname}")
-    public Greeting message(@DestinationVariable String channelname, RawMessage rmsg) throws Exception {
-        Thread.sleep(1000); // simulated delay
-        Message message = persist(channelname, rmsg);
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    @RequestMapping(path = "/api/message")
+    public Flux<Message> getMessage(RequestMessage requestMessage){
+        Date from = requestMessage.getFrom();
+        Date to = requestMessage.getTo();
+        List<Message> messageList = new ArrayList<>();
+        try{
+            Channel channel = channelRepository.findByName(requestMessage.getChannel()).get();
+            if ( from == null && to == null){
+                messageList = messageRepository.findByChannel(channel);
+            } else {
+                if (to == null){
+                    to = new Date();
+                }
+                if (from == null){
+                    from = new Date(0);
+                }
+                messageList = messageRepository.findByChannelAndCreatedBetween(channel, from, to);
+            }
+        } catch (Exception e){
+            // error
+        }
 
-        simpleDateFormat1.setTimeZone(TimeZone.getTimeZone("US/Pacific"));
-
-        return new Greeting(HtmlUtils.htmlEscape(message.getUser().getName()) +
-                " [" +
-                simpleDateFormat1.format(message.getCreated())
-                + "] : " + HtmlUtils.htmlEscape(message.getMessage()));
+        return Flux.fromStream(messageList.stream());
     }
 
-    private Message persist(String channelname, RawMessage rmsg) {
-        User user = null;
-        Channel channel = null;
-        try {
-            user = userRepository.findByName(rmsg.getName());
-        } catch (Exception e) {
-
-        }
-        if( user == null){
-            user = new User(rmsg.getName());
-            userRepository.save(user);
-        }
-        try {
-            channel = channelRepository.findByName(channelname);
-        } catch (Exception e) {
-
-        }
-        if( channel == null){
-            channel = new Channel(channelname);
-            channelRepository.save(channel);
-        }
-
-        Message msg = new Message(user, channel, rmsg.getMessage());
-        messageRepository.save(msg);
-        return msg;
-    }
-
+//    @RequestMapping(path = "/api/message")
+//    public String getMessage(RequestMessage requestMessage){
+//        System.out.println(requestMessage.getChannel());
+//        Channel channel = channelRepository.findByName(requestMessage.getChannel());
+//        List<Message> messageList = messageRepository.findByChannel(channel);
+//        if(messageList.size() == 0){
+//            return "";
+//        } else{
+//            return messageList.get(0).toString();
+//        }
+//    }
 }

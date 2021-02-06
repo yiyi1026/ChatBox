@@ -1,6 +1,9 @@
 package com.huiyu.ChatBox.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -12,16 +15,17 @@ import java.util.Date;
 @Getter
 @Table(name = "message")
 @Entity
+@NoArgsConstructor
 public class Message  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userid")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "channelid")
     private Channel channel;
 
@@ -37,5 +41,16 @@ public class Message  implements Serializable {
         this.user = user;
         this.channel = channel;
         this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", user=" + user +
+                ", channel=" + channel +
+                ", message='" + message + '\'' +
+                ", created=" + created +
+                '}';
     }
 }
